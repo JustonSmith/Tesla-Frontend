@@ -4,7 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
 
 function Header() {
-    const [burgerStatus, setBurgerStatus] = useState(false)
+    const [burgerStatus, setBurgerStatus] = useState(true)
 
     return (
         <Container>
@@ -22,11 +22,11 @@ function Header() {
             <RightMenu>
                 <a href="#">Shop</a>
                 <a href="#">Tesla Account</a>
-                <CustomMenu onClick= {() => setBurgerStatus(true)}  />
+                <CustomMenu onClick= {() => setBurgerStatus(false)}  />
             </RightMenu>
             <BurgerNav show= {burgerStatus}>
                 <CloseWrapper>
-                    <CustomClose onClick= {() => setBurgerStatus(false)} />
+                    <CustomClose onClick= {() => setBurgerStatus(true)} />
                 </CloseWrapper>
                 <li><a href="#"> Model S</a></li>
                 <li><a href="#"> Model 3 </a></li>
