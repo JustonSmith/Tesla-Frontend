@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import styled from "styled-components"
 import MenuIcon from '@mui/icons-material/Menu'
 import CloseIcon from '@mui/icons-material/Close'
+import { selectCars } from '../features/car/carSlice'
+import { useSelector } from 'react-redux'
 
 function Header() {
     const [burgerStatus, setBurgerStatus] = useState(true)
+    const cars = useSelector (selectCars)
+    console.log(cars)
 
     return (
         <Container>
@@ -12,12 +16,11 @@ function Header() {
                 <img src= "/images/logo.svg" alt="" />
             </a>
             <Menu>
-                <a href="#"> Model S</a>
-                <a href="#"> Model 3</a>
-                <a href="#"> Model X</a>
-                <a href="#"> Model Y</a>
-                {/* <a href="#"> Solar</a>
-                <a href="#"> Accessories</a> */}
+
+                { cars && cars.map((car, index)=>( 
+                <a key= { index } href="#"> { car }</a>
+                ))}
+
             </Menu>
             <RightMenu>
                 <a href="#">Shop</a>
@@ -28,10 +31,11 @@ function Header() {
                 <CloseWrapper>
                     <CustomClose onClick= {() => setBurgerStatus(true)} />
                 </CloseWrapper>
-                <li><a href="#"> Model S</a></li>
-                <li><a href="#"> Model 3 </a></li>
-                <li><a href="#"> Model X</a></li>
-                <li><a href="#"> Model Y</a></li>
+
+                { cars && cars.map ((car, index) => (
+                <li key= { index }><a href="#"> { car }</a></li>
+                ))}
+
                 <li><a href="#"> Existing Inventory</a></li>
                 <li><a href="#"> Used Inventory</a></li>
                 <li><a href="#"> Trade-In</a></li>
@@ -113,6 +117,7 @@ const BurgerNav = styled.div`
     flex-direction: column;
     text-align: start;
     transform: ${props => props.show ? 'translateX(100%)': 'translateX(0)'};
+    transition: transform 0.5s ease-in-out;
 
     li {
         padding: 15px 0;
